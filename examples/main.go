@@ -41,7 +41,7 @@ func main() {
 	testName := "foo-libdns."
 	add, err := provider.AppendRecords(context.TODO(), zone, []libdns.Record{libdns.Record{
 		Type:  "TXT",
-		Name:  testName,
+		Name:  testName + zone,
 		Value: fmt.Sprintf("Replacement test entry created by libdns %s", time.Now()),
 		TTL:   time.Duration(600) * time.Second,
 	}})
@@ -55,7 +55,7 @@ func main() {
 	testName = "foo-libdns."
 	edit, err := provider.SetRecords(context.TODO(), zone, []libdns.Record{libdns.Record{
 		Type:  "TXT",
-		Name:  testName,
+		Name:  testName + zone,
 		Value: fmt.Sprintf("SET1 test entry created by libdns %s", time.Now()),
 		TTL:   time.Duration(600) * time.Second,
 	}})
@@ -68,7 +68,7 @@ func main() {
 	testName = "foo-libdns."
 	del, err := provider.DeleteRecords(context.TODO(), zone, []libdns.Record{libdns.Record{
 		Type: "TXT",
-		Name: testName,
+		Name: testName + zone,
 	}})
 
 	if err != nil {

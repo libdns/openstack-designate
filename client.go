@@ -27,7 +27,6 @@ func (p *Provider) getRecords(recordSets []recordsets.RecordSet) ([]libdns.Recor
 }
 
 func (p *Provider) getRecordID(recordName string, zone string) (string, error) {
-	recordName = recordName + zone
 	listOpts := recordsets.ListOpts{
 		Type: "TXT",
 	}
@@ -53,7 +52,7 @@ func (p *Provider) getRecordID(recordName string, zone string) (string, error) {
 
 func (p *Provider) createRecord(record libdns.Record, zone string) error {
 	createOpts := recordsets.CreateOpts{
-		Name:    record.Name + zone,
+		Name:    record.Name,
 		Type:    record.Type,
 		TTL:     int(record.TTL / time.Second),
 		Records: []string{record.Value},
