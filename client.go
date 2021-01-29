@@ -148,8 +148,12 @@ func (p *Provider) auth() error {
 }
 
 func (p *Provider) setZone(zone string) error {
-	zoneName := zone + "."
-	zoneID, err := p.setZoneID(zoneName)
+	dot := zone[len(zone)-1:]
+	if dot != "." {
+		zone = zone + "."
+	}
+
+	zoneID, err := p.setZoneID(zone)
 	if err != nil {
 		return err
 	}
